@@ -21,10 +21,15 @@ template = PromptTemplate(
     partial_variables={'format_instruction': parser.get_format_instructions()}
 )
 
-prompt = template.invoke({'topic': 'black hole'})
+# prompt = template.invoke({'topic': 'black hole'})
 
-result = model.invoke(prompt)
+# result = model.invoke(prompt)
 
-final_result = parser.parse(result.content)
+# final_result = parser.parse(result.content)
+
+### using chain methods
+chain = template | model | parser
+
+final_result = chain.invoke({'topic': 'black hole'})
 
 print(final_result)
