@@ -15,10 +15,16 @@ template = PromptTemplate(
     partial_variables={'format_instruction': parser.get_format_instructions()}
 )
 
-prompt = template.format_prompt()
+# prompt = template.format_prompt()
 
-result = model.invoke(prompt)
+# result = model.invoke(prompt)
 
-final_result = parser.parse(result.content)
+# final_result = parser.parse(result.content)
+
+### using chain methods
+
+chain = template | model | parser
+final_result = chain.invoke({})
+
 print(final_result)
 print(final_result['name'])
