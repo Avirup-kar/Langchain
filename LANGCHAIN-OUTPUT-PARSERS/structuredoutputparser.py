@@ -20,3 +20,11 @@ template = PromptTemplate(
     input_variables=['topic'],
     partial_variables={'format_instruction': parser.get_format_instructions()}
 )
+
+prompt = template.invoke({'topic': 'black hole'})
+
+result = model.invoke(prompt)
+
+final_result = parser.parse(result.content)
+
+print(final_result)
