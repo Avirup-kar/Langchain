@@ -41,3 +41,10 @@ branch_chain = RunnableBranch(
     RunnableLambda(lambda x: "could not find sentiment")
 )
 
+chain = classifier_chain | branch_chain
+
+result = chain.invoke({'feedback': 'This is a beautiful phone it has a great camera and the battery life is amazing'})
+
+print("Feedback:", result)
+
+chain.get_graph().print_ascii()
