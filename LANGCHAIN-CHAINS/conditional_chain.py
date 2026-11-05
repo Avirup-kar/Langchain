@@ -2,7 +2,7 @@ from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser, PydanticOutputParser
-from langchain_core.runnables import RunnableParallel, RunnableBranch
+from langchain_core.runnables import RunnableParallel, RunnableBranch, RunnableLambda
 from pydantic import BaseModel, Field
 from typing import Literal
 
@@ -37,5 +37,7 @@ prompt3 = PromptTemplate(
 
 branch_chain = RunnableBranch(
     (lambda x:x.sentiment == 'positive', prompt2 | model1 | parser),
-    (lambda x:x.sentiment == 'negative', prompt3 | model1 | parser)
+    (lambda x:x.sentiment == 'negative', prompt3 | model1 | parser),
+    RunnableLambda(lambda x: "could not find sentiment")
 )
+
