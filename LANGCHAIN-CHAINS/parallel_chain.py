@@ -3,6 +3,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnableParallel
 
 load_dotenv()
 
@@ -24,3 +25,6 @@ prompt3 = PromptTemplate(
     template='Merge the provided notes and quiz into a single document \n notes -> {notes} and quiz -> {quiz}',
     input_variables=['notes', 'quiz']
 )
+
+parser = StrOutputParser()
+
