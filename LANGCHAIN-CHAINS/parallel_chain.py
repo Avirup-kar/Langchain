@@ -62,3 +62,7 @@ text = """
     """
 
 result = chain.invoke({'text': text})
+
+print(result)
+
+chain.get_graph().print_ascii()
