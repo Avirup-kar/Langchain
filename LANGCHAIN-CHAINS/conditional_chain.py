@@ -43,7 +43,7 @@ branch_chain = RunnableBranch(
 
 chain = classifier_chain | branch_chain
 
-result = chain.invoke({'feedback': 'This is a beautiful phone it has a great camera and the battery life is amazing'})
+result = chain.invoke({'feedback': 'This is a beautiful laptop it has a great screen and the battery life is amazing'})
 
 print("Feedback:", result)
 
