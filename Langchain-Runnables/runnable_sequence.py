@@ -6,7 +6,7 @@ from langchain_core.runnables import RunnableSequence
 
 load_dotenv()
 
-model = ChatGroq(model="openai/gpt-oss-20b", temperature=0.1, max_tokens=500)
+model = ChatGroq(model="openai/gpt-oss-20b", temperature=0.1, max_tokens=200)
 
 prompt = PromptTemplate(
     template='Write a joke about {topic}',
@@ -15,9 +15,14 @@ prompt = PromptTemplate(
 
 parser = StrOutputParser()
 
-# chain = RunnableSequence(prompt, model, parser) ## using RunnableSequence to create a chain
-chain = prompt | model | parser ## using the pipe operator to create a RunnableSequence
+prompt2 = PromptTemplate(
+    template='Explain the following joke {text}',
+    input_variables=['text']
+)
 
-result = chain.invoke({'topic': 'AI'})
+# chain = RunnableSequence(prompt, model, parser, prompt2, model, parser) ## using RunnableSequence to create a chain
+chain = prompt | model | parser | prompt2 | model | parser ## using the pipe operator to create a RunnableSequence
+
+result = chain.invoke({'topic': 'cat'})
 
 print(result)
