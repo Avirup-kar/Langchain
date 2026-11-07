@@ -1,0 +1,1 @@
+print(passthrough.invoke({'name': 'nitish'}))
