@@ -17,9 +17,12 @@ parser = StrOutputParser()
 
 jock_gen_chain = RunnableSequence(prompt, model, parser)
 
+def count_joke(joke: str) -> int:
+    return len(joke.split())
+
 parallel_chain = RunnableParallel({
     'jock': RunnablePassthrough(),
-    'count': RunnableLambda()
+    'count': RunnableLambda(count_joke)
 })
 
 final_chain = jock_gen_chain | parallel_chain
@@ -28,5 +31,5 @@ result = final_chain.invoke({'topic': 'cat'})
 
 print("Joke:")
 print(result['jock'])   
-print("Explanation:")
-print(result['explanation'])
+print("Count:")
+print(result['count'])
