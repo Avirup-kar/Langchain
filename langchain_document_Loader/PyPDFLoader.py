@@ -1,7 +1,7 @@
-from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyMuPDFLoader
 
-loader = PyPDFLoader('dl-curriculum.pdf')
+loader = PyMuPDFLoader('dl-curriculum.pdf')
 
 docs = loader.load()
 
-print(docs[0].page_content)
+print(docs[1].page_content)
