@@ -26,3 +26,9 @@ conditional_chain = RunnableBranch(
     (lambda x: len(x.split())>500, RunnableSequence(prompt2, model, parser)),
     RunnablePassthrough()
     )
+
+final_chain = first_chain | conditional_chain
+
+res = final_chain.invoke({'topic': 'Russia vs ukraine'})
+
+print(res)
