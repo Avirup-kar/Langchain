@@ -16,7 +16,7 @@ prompt1 = PromptTemplate(
 )
 
 prompt2 = PromptTemplate(
-    template='Summarize the following text add \n {text}',
+    template='Summarize the following text in short like 50 to 80 word \n {text}',
     input_variables=['text']
 )
 
@@ -24,7 +24,7 @@ first_chain = RunnableSequence(prompt1, model, parser)
 
 
 conditional_chain = RunnableBranch(
-    (lambda x: len(x.split())>500, RunnableSequence(prompt2, model, parser)),
+    (lambda x: len(x.split())>200, RunnableSequence(prompt2, model, parser)),
     RunnablePassthrough()
     )
 
