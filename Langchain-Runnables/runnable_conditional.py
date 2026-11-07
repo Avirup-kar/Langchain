@@ -16,11 +16,12 @@ prompt1 = PromptTemplate(
 )
 
 prompt2 = PromptTemplate(
-    template='Summarize the following text \n {text}',
+    template='Summarize the following text add \n {text}',
     input_variables=['text']
 )
 
 first_chain = RunnableSequence(prompt1, model, parser)
+
 
 conditional_chain = RunnableBranch(
     (lambda x: len(x.split())>500, RunnableSequence(prompt2, model, parser)),
@@ -32,3 +33,4 @@ final_chain = first_chain | conditional_chain
 res = final_chain.invoke({'topic': 'Russia vs ukraine'})
 
 print(res)
+print("Length of the report:", len(res.split()))
