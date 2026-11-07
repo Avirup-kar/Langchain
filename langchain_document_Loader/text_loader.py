@@ -18,5 +18,9 @@ prompt = PromptTemplate(
 loader = TextLoader('cricket.txt', encoding='utf-8')
 docs = loader.load()
 
-print(type(docs))
-print(docs[0].page_content)
+# print(type(docs))
+# print(docs[0].page_content)
+
+chain = prompt | model | parser
+
+print(chain.invoke({'poem':docs[0].page_content}))
